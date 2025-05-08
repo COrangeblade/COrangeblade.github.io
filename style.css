@@ -1,7 +1,8 @@
+/* 基础样式 */
 body {
   margin: 0;
   font-family: Arial, sans-serif;
-  background-color: #1a1a1a;
+  background-color: #1a1a1a; /* 深色背景 */
   color: white;
 }
 
@@ -19,6 +20,9 @@ header {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 10px;
 }
 
 .nav-left a {
@@ -36,13 +40,9 @@ header {
   display: flex;
   align-items: center;
   gap: 10px;
-}
-
-#avatar {
-  width: 30px;
-  height: 30px;
-  border-radius: 50%;
-  display: none;
+  flex-shrink: 0;
+  max-width: 100%;
+  overflow: hidden;
 }
 
 #login-btn {
@@ -58,6 +58,14 @@ header {
   background-color: #666;
 }
 
+#avatar {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  display: none;
+}
+
+/* 主体内容布局 */
 main {
   display: flex;
   justify-content: center;
@@ -72,43 +80,42 @@ main {
   flex-direction: column;
   align-items: center;
   text-align: center;
-  margin-top: -60px; /* 上移内容让页面更靠上 */
+  margin-top: -120px; /* 向上调整位置 */
 }
 
-.intro-text h1 {
-  font-size: 2.5em;
-  color: white;
-  margin-bottom: 10px;
-}
-
-.intro-text p {
-  font-size: 1.2em;
-  color: #bbb;
+/* 文字区域 */
+.intro-text {
   margin-bottom: 30px;
 }
 
-.button-stack {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 25px;
+h1 {
+  font-size: 2.5em;
+  margin-bottom: 10px;
+  color: white;
 }
 
+p {
+  font-size: 1.2em;
+  margin-bottom: 20px;
+  color: #bbb;
+}
+
+/* 按钮样式 */
 .button-group {
   display: flex;
+  flex-direction: column;
   gap: 15px;
-  flex-wrap: wrap;
-  justify-content: center;
 }
 
 .main-button {
-  padding: 10px 20px;
+  display: inline-block;
+  padding: 12px 20px;
   background-color: #333;
   color: white;
   text-decoration: none;
   border-radius: 6px;
-  font-size: 1em;
   transition: background-color 0.3s;
+  min-width: 200px;
 }
 
 .main-button:hover {
