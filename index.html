@@ -2,84 +2,79 @@
 <html lang="zh">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>个人主页</title>
     <style>
         body {
             font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
             background-color: #f0f0f0;
-            color: #333;
+            margin: 0;
         }
         header {
             display: flex;
             justify-content: space-between;
-            align-items: center;
             background-color: #0073e6;
+            color: white;
             padding: 10px 20px;
-            color: white;
-        }
-        header a {
-            color: white;
-            text-decoration: none;
-            font-size: 16px;
-            margin-left: 20px;
-        }
-        header a:hover {
-            text-decoration: underline;
-        }
-        .login-buttons {
-            display: flex;
-            gap: 10px;
-        }
-        main {
-            text-align: center;
-            padding: 50px;
         }
         .button {
             background-color: #0073e6;
-            color: white;
             border: none;
-            padding: 15px 30px;
-            font-size: 18px;
+            color: white;
+            padding: 10px 20px;
             cursor: pointer;
-            margin: 10px;
             border-radius: 5px;
         }
         .button:hover {
             background-color: #005bb5;
         }
+        .login-buttons img {
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+        }
     </style>
 </head>
 <body>
+    <header>
+        <div>我的个人主页</div>
+        <div class="login-buttons">
+            <a href="/login">
+                <button class="button">GitHub 登录</button>
+            </a>
+        </div>
+    </header>
 
-<header>
-    <div>我的个人主页</div>
-    <div class="login-buttons">
-        <!-- GitHub 登录 -->
-        <a href="https://github.com/login/oauth/authorize?client_id=Ov23liupPam9trKuoXLw&redirect_uri=https://corangeblade.github.io">
-            <button class="button">GitHub 登录</button>
-        </a>
+    <main style="text-align:center; padding: 50px;">
+        <h1>欢迎来到我的个人主页！</h1>
+        <p>这里是我的博客和友链等信息的入口。</p>
+        <div>
+            <a href="/blog.html"><button class="button">访问我的博客</button></a>
+            <a href="/friends-links.html"><button class="button">友链</button></a>
+            <a href="/projects.html"><button class="button">我的项目</button></a>
+        </div>
+    </main>
 
-    </div>
-</header>
+    <script>
+        function getCookie(name) {
+            const match = document.cookie.match(new RegExp('(^| )' + name + '=([^;]+)'));
+            return match ? decodeURIComponent(match[2]) : null;
+        }
 
-<main>
-    <h1>欢迎来到我的个人主页！</h1>
-    <p>这里是我的博客和友链等信息的入口。</p>
-    <div>
-        <a href="/blog.html">
-            <button class="button">访问我的博客</button>
-        </a>
-        <a href="/friends-links.html">
-            <button class="button">友链</button>
-        </a>
-        <a href="/projects.html">
-            <button class="button">我的项目</button>
-        </a>
-    </div>
-</main>
+        const username = getCookie('username');
+        const avatar = getCookie('avatar');
 
+        if (username && avatar) {
+            const loginDiv = document.querySelector('.login-buttons');
+            loginDiv.innerHTML = `
+                <img src="${avatar}" alt="${username}" title="${username}" />
+                <button class="button" onclick="logout()">登出</button>
+            `;
+        }
+
+        function logout() {
+            fetch('/logout')
+                .then(() => location.reload());
+        }
+    </script>
 </body>
 </html>
