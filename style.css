@@ -21,13 +21,13 @@ header {
   align-items: center;
 }
 
-.nav-left a {
+.nav-left .nav-link {
   color: #ccc;
   text-decoration: none;
-  margin-right: 20px;
+  font-weight: bold;
 }
 
-.nav-left a:hover {
+.nav-left .nav-link:hover {
   color: white;
   text-decoration: underline;
 }
@@ -58,7 +58,7 @@ header {
   background-color: #666;
 }
 
-/* 主内容区域 */
+/* 主体内容 */
 main {
   display: flex;
   justify-content: center;
@@ -68,12 +68,38 @@ main {
 }
 
 .center-content {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  transform: translateY(-15%); /* 内容略向上移 */
   text-align: center;
+  transform: translateY(-15%);
 }
 
 .intro-text h1 {
-  font-size: 2
+  font-size: 2.5em;
+  margin-bottom: 10px;
+}
+
+.intro-text p {
+  font-size: 1.2em;
+  margin-bottom: 30px;
+  color: #bbb;
+}
+
+/* 三个主按钮 */
+.button-group {
+  display: flex;
+  gap: 30px;
+  justify-content: center;
+}
+
+.main-button {
+  background-color: #333;
+  color: white;
+  text-decoration: none;
+  padding: 12px 24px;
+  border-radius: 6px;
+  font-size: 1em;
+  transition: background-color 0.3s ease;
+}
+
+.main-button:hover {
+  background-color: #555;
+}
