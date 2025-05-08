@@ -3,29 +3,39 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Welcome COB's Home!</title>
+  <title>COB's Home</title>
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
   <header>
-    <nav>
-      <ul class="nav-left">
-        <li><a href="index.html">首页</a></li>
-        <li><a href="blog.html">博客</a></li>
-        <li><a href="links.html">友链</a></li>
-        <li><a href="projects.html">项目</a></li>
-      </ul>
+    <nav class="navbar">
+      <div class="nav-left">
+        <a href="index.html">首页</a>
+        <a href="blog.html">博客</a>
+        <a href="links.html">友链</a>
+        <a href="projects.html">项目</a>
+      </div>
       <div class="nav-right">
         <button id="login-btn">GitHub 登录</button>
-        <img id="avatar" style="display:none; width:32px; height:32px; border-radius:50%;" />
+        <img id="avatar" />
       </div>
     </nav>
   </header>
 
   <main>
-    <!-- 页面主要内容 -->
+    <h1>Welcome COB's Home</h1>
+    <p>现役蒟蒻OIer，MC老玩家。</p>
   </main>
 
   <script src="auth.js"></script>
+  <script>
+    // 显示头像逻辑
+    const avatarUrl = localStorage.getItem('avatar_url');
+    if (avatarUrl) {
+      document.getElementById('avatar').src = avatarUrl;
+      document.getElementById('avatar').style.display = 'inline-block';
+      document.getElementById('login-btn').style.display = 'none';
+    }
+  </script>
 </body>
 </html>
