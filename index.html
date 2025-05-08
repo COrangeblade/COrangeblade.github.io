@@ -1,3 +1,98 @@
-<h1>Hello!
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>我的个人主页</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', sans-serif;
+        }
 
-<h1>Welcome to COB's home!
+        body {
+            background: #f5f5f5;
+            line-height: 1.6;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        header {
+            text-align: center;
+            padding: 40px 0;
+        }
+
+        .nav-buttons {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            justify-content: center;
+            margin: 30px 0;
+        }
+
+        .nav-btn {
+            padding: 12px 25px;
+            background: #333;
+            color: white;
+            text-decoration: none;
+            border-radius: 25px;
+            transition: 0.3s;
+        }
+
+        .nav-btn:hover {
+            background: #555;
+            transform: translateY(-2px);
+        }
+
+        section {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+        }
+
+        footer {
+            text-align: center;
+            padding: 20px;
+            color: #666;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>欢迎来到我的空间</h1>
+            <p>探索我的数字世界</p>
+        </header>
+
+        <div class="nav-buttons">
+            <a href="#about" class="nav-btn">关于我</a>
+            <a href="blog.html" class="nav-btn">我的博客</a>
+            <a href="friends.html" class="nav-btn">友情链接</a>
+            <a href="projects.html" class="nav-btn">项目展示</a>
+            <a href="contact.html" class="nav-btn">联系我</a>
+        </div>
+
+        <section id="about">
+            <h2>关于我</h2>
+            <p>这里可以写个人简介，展示你的专业领域、兴趣爱好等信息。保持简洁有力的文字描述。</p>
+        </section>
+
+        <section id="latest">
+            <h2>最新动态</h2>
+            <p>更新日志、近期成就或计划事项...</p>
+        </section>
+
+        <footer>
+            <p>© 2024 我的个人主页 | 由HTML+CSS驱动</p>
+        </footer>
+    </div>
+</body>
+</html>
