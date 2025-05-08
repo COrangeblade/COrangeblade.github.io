@@ -1,62 +1,50 @@
+// server.js
 const express = require('express');
 const axios = require('axios');
-const cookieParser = require('cookie-parser');
-require('dotenv').config();
-
+const cors = require('cors');
 const app = express();
-const PORT = 3000;
 
-app.use(express.static('public'));
-app.use(cookieParser());
+app.use(cors());
 
-// 登录重定向到 GitHub OAuth 授权页
-app.get('/login', (req, res) => {
-    const redirect_uri = `http://localhost:${PORT}/callback`;
-    const githubUrl = `https://github.com/login/oauth/authorize?client_id=${process.env.CLIENT_ID}&redirect_uri=${encodeURIComponent(redirect_uri)}`;
-    res.redirect(githubUrl);
+const client_id = '你的 GitHub Client ID';
+const client_secret = '你的 GitHub Client Secret';
+
+app.get('/github-oauth', async (req, res) => {
+  const code = req.query.code;
+
+  try {
+    // 获取 access_token
+    const tokenRes = await axios.post(
+      'https://github.com/login/oauth/access_token',
+      {
+        client_id,
+        client_secret,
+        code
+      },
+      {
+        headers: {
+          accept: 'application/json'
+        }
+      }
+    );
+
+    const access_token = tokenRes.data.access_token;
+
+    // 获取用户信息
+    const userRes = await axios.get('https://api.github.com/user', {
+      headers: {
+        Authorization: `token ${access_token}`
+      }
+    });
+
+    const { login, avatar_url } = userRes.data;
+
+    res.json({ login, avatar_url });
+  } catch (err) {
+    res.status(500).json({ error: '授权失败', details: err.message });
+  }
 });
 
-// GitHub OAuth 回调
-app.get('/callback', async (req, res) => {
-    const code = req.query.code;
-    if (!code) return res.status(400).send('缺少 code');
-
-    try {
-        const tokenRes = await axios.post(
-            'https://github.com/login/oauth/access_token',
-            {
-                client_id: process.env.CLIENT_ID,
-                client_secret: process.env.CLIENT_SECRET,
-                code
-            },
-            { headers: { accept: 'application/json' } }
-        );
-
-        const access_token = tokenRes.data.access_token;
-        if (!access_token) return res.status(400).send('access_token 获取失败');
-
-        const userRes = await axios.get('https://api.github.com/user', {
-            headers: { Authorization: `Bearer ${access_token}` }
-        });
-
-        const user = userRes.data;
-        res.cookie('username', user.login, { maxAge: 86400000 });
-        res.cookie('avatar', user.avatar_url, { maxAge: 86400000 });
-
-        res.redirect('/');
-    } catch (err) {
-        console.error(err);
-        res.status(500).send('登录失败');
-    }
-});
-
-// 登出接口
-app.get('/logout', (req, res) => {
-    res.clearCookie('username');
-    res.clearCookie('avatar');
-    res.sendStatus(200);
-});
-
-app.listen(PORT, () => {
-    console.log(`服务器运行在 http://localhost:${PORT}`);
+app.listen(3000, () => {
+  console.log('OAuth 服务运行在 http://localhost:3000');
 });
