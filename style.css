@@ -21,6 +21,7 @@ header {
   align-items: center;
 }
 
+/* 顶部左侧链接 */
 .nav-left .nav-link {
   color: #ccc;
   text-decoration: none;
@@ -32,21 +33,23 @@ header {
   text-decoration: underline;
 }
 
+/* 顶部右侧登录区 */
 .nav-right {
   display: flex;
   align-items: center;
+  gap: 10px;
 }
 
 #avatar {
   width: 30px;
   height: 30px;
   border-radius: 50%;
-  margin-left: 10px;
-  display: none;
+  display: inline-block;
+  visibility: hidden; /* 占位但默认隐藏 */
 }
 
 #login-btn {
-  padding: 5px 10px;
+  padding: 6px 12px;
   background-color: #444;
   color: white;
   border: none;
@@ -58,20 +61,21 @@ header {
   background-color: #666;
 }
 
-/* 主体内容 */
+/* 主体内容区域 */
 main {
   display: flex;
   justify-content: center;
   align-items: center;
   height: 100vh;
   padding-top: 60px;
+  text-align: center;
 }
 
 .center-content {
-  text-align: center;
-  transform: translateY(-15%);
+  transform: translateY(-20%);
 }
 
+/* 欢迎语区域 */
 .intro-text h1 {
   font-size: 2.5em;
   margin-bottom: 10px;
@@ -83,11 +87,12 @@ main {
   color: #bbb;
 }
 
-/* 三个主按钮 */
+/* 主按钮区域 */
 .button-group {
   display: flex;
-  gap: 30px;
-  justify-content: center;
+  flex-direction: column;
+  gap: 15px;
+  align-items: center;
 }
 
 .main-button {
@@ -98,8 +103,45 @@ main {
   border-radius: 6px;
   font-size: 1em;
   transition: background-color 0.3s ease;
+  min-width: 200px;
+  text-align: center;
 }
 
 .main-button:hover {
   background-color: #555;
+}
+
+/* ✅ 响应式优化 */
+@media screen and (max-width: 600px) {
+  .navbar {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .nav-right {
+    width: 100%;
+    justify-content: flex-end;
+    margin-top: 10px;
+  }
+
+  main {
+    padding: 80px 20px 20px;
+  }
+
+  .center-content {
+    transform: translateY(-10%);
+  }
+
+  .main-button {
+    width: 100%;
+    max-width: 280px;
+  }
+
+  .intro-text h1 {
+    font-size: 1.8em;
+  }
+
+  .intro-text p {
+    font-size: 1em;
+  }
 }
