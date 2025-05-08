@@ -1,58 +1,55 @@
 body {
   margin: 0;
   font-family: Arial, sans-serif;
-  background-color: #1a1a1a; /* 页面背景色设置为深色 */
-  color: white; /* 默认文字颜色为白色 */
+  background-color: #1a1a1a;
+  color: white;
 }
 
 header {
-  background-color: #111; /* 深色背景 */
-  padding: 10px 20px;
-  position: fixed; /* 确保导航栏固定在顶部 */
+  background-color: #111;
+  position: fixed;
   top: 0;
   left: 0;
   width: 100%;
-  z-index: 1000; /* 确保导航栏位于最上层 */
+  height: 60px;
+  z-index: 1000;
 }
 
 .navbar {
-  display: flex;
-  justify-content: space-between; /* 左右两侧分开 */
-  align-items: center;
+  position: relative;
+  height: 100%;
 }
 
-.nav-left {
-  display: flex;
-  align-items: center;
+/* 左上角：首页 */
+.nav-corner-left {
+  position: absolute;
+  top: 10px;
+  left: 20px;
 }
 
-.nav-left a {
-  color: #ccc; /* 链接文字颜色设置为浅灰色 */
+.nav-corner-left a {
+  color: #ccc;
   text-decoration: none;
-  margin-right: 20px;
+  font-weight: bold;
 }
 
-.nav-left a:hover {
+.nav-corner-left a:hover {
+  color: white;
   text-decoration: underline;
-  color: white; /* 鼠标悬停时链接变为白色 */
 }
 
-.nav-right {
+/* 右上角：登录按钮 + 头像 */
+.nav-corner-right {
+  position: absolute;
+  top: 10px;
+  right: 20px;
   display: flex;
   align-items: center;
-}
-
-#avatar {
-  width: 30px;
-  height: 30px;
-  border-radius: 50%;
-  margin-left: 10px;
-  display: none; /* 默认隐藏头像 */
 }
 
 #login-btn {
   padding: 5px 10px;
-  background-color: #444; /* 深灰色按钮背景 */
+  background-color: #444;
   color: white;
   border: none;
   border-radius: 4px;
@@ -60,34 +57,64 @@ header {
 }
 
 #login-btn:hover {
-  background-color: #666; /* 按钮悬停时变亮 */
+  background-color: #666;
 }
 
-/* 主内容部分 */
+#avatar {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  margin-left: 10px;
+  display: none;
+}
+
+/* 中间偏上的导航按钮 */
+.nav-center {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -60%);
+  display: flex;
+  gap: 30px;
+}
+
+.nav-center a {
+  color: #ccc;
+  text-decoration: none;
+  font-size: 1.2em;
+}
+
+.nav-center a:hover {
+  color: white;
+  text-decoration: underline;
+}
+
+/* 主内容 */
 main {
   display: flex;
   justify-content: center;
-  align-items: flex-start; /* 让内容稍微偏上 */
-  height: 100vh; /* 占据整个屏幕高度 */
-  margin-top: 60px; /* 给导航栏留出空间 */
-  background-color: #121212; /* 主内容区域背景色设置为更深的黑色 */
+  align-items: flex-start;
+  height: 100vh;
+  margin-top: 60px;
+  background-color: #121212;
 }
 
 .content {
   text-align: center;
   padding: 20px;
   position: absolute;
-  top: 30%; /* 让内容区域稍微偏上 */
+  top: 60%;
+  transform: translateY(-50%);
 }
 
 h1 {
   font-size: 2.5em;
   margin-bottom: 20px;
-  color: white; /* 标题文字颜色为白色 */
+  color: white;
 }
 
 p {
   font-size: 1.2em;
   margin-bottom: 20px;
-  color: #bbb; /* 正文文字颜色为浅灰色 */
+  color: #bbb;
 }
