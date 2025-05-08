@@ -1,67 +1,52 @@
-body {
-  margin: 0;
-  font-family: Arial, sans-serif;
-  background-color: #1a1a1a;
-  color: white;
-}
-
-header {
-  background-color: #111;
-  padding: 10px 20px;
-  position: fixed;
-  top: 0;
-  width: 100%;
-  z-index: 1000;
-}
-
-.navbar {
-  max-width: 1200px;
-  margin: 0 auto;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.nav-left a {
-  color: #ccc;
-  text-decoration: none;
-  margin-right: 20px;
-}
-
-.nav-left a:hover {
-  text-decoration: underline;
-  color: white;
-}
-
-.nav-right {
-  display: flex;
-  align-items: center;
-}
-
-#avatar {
-  width: 30px;
-  height: 30px;
-  border-radius: 50%;
-  margin-left: 10px;
-  display: none;
-}
-
-#login-btn {
-  padding: 5px 10px;
-  background-color: #444;
-  color: white;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-}
-
-#login-btn:hover {
-  background-color: #666;
-}
-
-/* --- Main content --- */
-
 main {
   display: flex;
   justify-content: center;
-  align-items:
+  align-items: center;
+  min-height: calc(100vh - 60px);
+  padding-top: 60px;
+}
+
+.center-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 30px; /* 内容块之间的距离 */
+  text-align: center;
+  margin-top: -40px; /* 更轻的上移 */
+}
+
+.intro-text h1 {
+  font-size: 2.5em;
+  margin: 0;
+  color: white;
+}
+
+.intro-text p {
+  font-size: 1.2em;
+  margin: 0;
+  color: #bbb;
+}
+
+.button-stack {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px; /* 关注按钮与按钮组之间的距离 */
+}
+
+.button-group {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 15px;
+}
+
+.main-button {
+  display: inline-block;
+  padding: 12px 24px;
+  background-color: #333;
+  color: white;
+  text-decoration: none;
+  border-radius: 6px;
+  font-size: 1em;
+  transition
