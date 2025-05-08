@@ -1,65 +1,62 @@
-require('dotenv').config();
 const express = require('express');
 const axios = require('axios');
-const cors = require('cors');
+const cookieParser = require('cookie-parser');
+require('dotenv').config();
 
 const app = express();
-app.use(cors());
-app.use(express.json());
+const PORT = 3000;
 
-// 临时数据库
-let articles = [];
-let users = [];
+app.use(express.static('public'));
+app.use(cookieParser());
 
-// GitHub OAuth配置
-const GITHUB_CLIENT_ID = process.env.GITHUB_CLIENT_ID;
-const GITHUB_CLIENT_SECRET = process.env.GITHUB_CLIENT_SECRET;
+// 登录重定向到 GitHub OAuth 授权页
+app.get('/login', (req, res) => {
+    const redirect_uri = `http://localhost:${PORT}/callback`;
+    const githubUrl = `https://github.com/login/oauth/authorize?client_id=${process.env.CLIENT_ID}&redirect_uri=${encodeURIComponent(redirect_uri)}`;
+    res.redirect(githubUrl);
+});
 
-// 认证路由
-app.get('/auth/github', async (req, res) => {
-    const { code } = req.query;
-    
-    // 获取Access Token
-    const { data } = await axios.post('https://github.com/login/oauth/access_token', {
-        client_id: GITHUB_CLIENT_ID,
-        client_secret: GITHUB_CLIENT_SECRET,
-        code
-    }, { headers: { Accept: 'application/json' } });
+// GitHub OAuth 回调
+app.get('/callback', async (req, res) => {
+    const code = req.query.code;
+    if (!code) return res.status(400).send('缺少 code');
 
-    // 获取用户信息
-    const userRes = await axios.get('https://api.github.com/user', {
-        headers: { Authorization: `Bearer ${data.access_token}` }
-    });
+    try {
+        const tokenRes = await axios.post(
+            'https://github.com/login/oauth/access_token',
+            {
+                client_id: process.env.CLIENT_ID,
+                client_secret: process.env.CLIENT_SECRET,
+                code
+            },
+            { headers: { accept: 'application/json' } }
+        );
 
-    // 用户数据
-    const userData = {
-        id: userRes.data.id,
-        username: userRes.data.login,
-        avatar: userRes.data.avatar_url,
-        token: data.access_token
-    };
+        const access_token = tokenRes.data.access_token;
+        if (!access_token) return res.status(400).send('access_token 获取失败');
 
-    // 保存用户
-    if (!users.find(u => u.id === userData.id)) {
-        users.push(userData);
+        const userRes = await axios.get('https://api.github.com/user', {
+            headers: { Authorization: `Bearer ${access_token}` }
+        });
+
+        const user = userRes.data;
+        res.cookie('username', user.login, { maxAge: 86400000 });
+        res.cookie('avatar', user.avatar_url, { maxAge: 86400000 });
+
+        res.redirect('/');
+    } catch (err) {
+        console.error(err);
+        res.status(500).send('登录失败');
     }
-
-    res.redirect(`/?token=${data.access_token}`);
 });
 
-// 文章API
-app.get('/api/articles', (req, res) => {
-    res.json(articles);
+// 登出接口
+app.get('/logout', (req, res) => {
+    res.clearCookie('username');
+    res.clearCookie('avatar');
+    res.sendStatus(200);
 });
 
-app.post('/api/articles', (req, res) => {
-    const newArticle = {
-        ...req.body,
-        id: Date.now().toString(),
-        createdAt: new Date()
-    };
-    articles.push(newArticle);
-    res.status(201).json(newArticle);
+app.listen(PORT, () => {
+    console.log(`服务器运行在 http://localhost:${PORT}`);
 });
-
-app.listen(3000, () => console.log('服务器运行在 http://localhost:3000'));
