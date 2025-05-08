@@ -35,7 +35,7 @@
     <script>
         // 构造 GitHub 授权地址（保持与 server.js 中的一致）
         const clientId = 'Ov23liupPam9trKuoXLw';
-        const redirectUri = encodeURIComponent('http://localhost:3000/callback');
+        const redirectUri = encodeURIComponent('https://corangeblade.github.io/callback.html');
         const githubAuthUrl = `https://github.com/login/oauth/authorize?client_id=${clientId}&redirect_uri=${redirectUri}`;
         // 跳转到 GitHub OAuth 页面
         window.location.href = githubAuthUrl;
