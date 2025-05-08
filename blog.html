@@ -1,102 +1,11 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>技术博客系统</title>
-    <link rel="stylesheet" href="style.css">
-    <!-- 依赖库 -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css">
-    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js"></script>
+  <meta charset="UTF-8">
+  <title>博客</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div class="container">
-        <!-- 登录界面 -->
-        <div class="auth-box" id="loginBox">
-            <h2>使用GitHub登录</h2>
-            <button class="github-login" onclick="startOAuthFlow()">
-                <img src="https://icon-library.com/images/github-icon-white/github-icon-white-6.jpg" alt="GitHub图标">
-                继续使用GitHub
-            </button>
-        </div>
-
-        <!-- 博客主界面 -->
-        <div class="blog-container" id="blogContainer" style="display:none;">
-            <div class="toolbar">
-                <button onclick="showEditor()">新建文章</button>
-                <button onclick="logout()">退出登录</button>
-            </div>
-            
-            <div id="editorModal" class="modal">
-                <div class="modal-content">
-                    <input type="text" id="articleTitle" placeholder="文章标题">
-                    <textarea id="articleContent" placeholder="使用Markdown书写..."></textarea>
-                    <div class="preview" id="previewArea"></div>
-                    <button onclick="saveArticle()">保存</button>
-                    <button onclick="closeEditor()">取消</button>
-                </div>
-            </div>
-
-            <div id="articlesList"></div>
-        </div>
-    </div>
-
-    <script>
-        // 认证状态管理
-        let currentUser = JSON.parse(localStorage.getItem('currentUser')) || null;
-        
-        // 初始化检查登录状态
-        if (currentUser?.token) checkAuthState();
-
-        // GitHub OAuth流程
-        function startOAuthFlow() {
-            const state = Math.random().toString(36).substring(7);
-            localStorage.setItem('oauth_state', state);
-            
-            window.location.href = `http://localhost:3000/auth/github?state=${state}`;
-        }
-
-        // 文章渲染逻辑
-        function renderMarkdown(content) {
-            const latexProcessed = content.replace(/\$\$(.*?)\$\$/g, (_, math) => {
-                try {
-                    return katex.renderToString(math, { throwOnError: false });
-                } catch {
-                    return math;
-                }
-            });
-            
-            return marked.parse(latexProcessed, {
-                breaks: true,
-                sanitize: true
-            });
-        }
-
-        // 文章保存逻辑
-        async function saveArticle() {
-            const article = {
-                title: document.getElementById('articleTitle').value,
-                content: document.getElementById('articleContent').value,
-                author: currentUser.username
-            };
-
-            try {
-                const response = await fetch('/api/articles', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'Authorization': `Bearer ${currentUser.token}`
-                    },
-                    body: JSON.stringify(article)
-                });
-                
-                loadArticles();
-                closeEditor();
-            } catch (error) {
-                console.error('保存失败:', error);
-            }
-        }
-    </script>
+  <h1>博客</h1>
 </body>
 </html>
