@@ -1,27 +1,46 @@
-nav {
+body {
+  background-color: #111;
+  color: #fff;
+  font-family: 'Segoe UI', sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+.navbar {
   display: flex;
   justify-content: space-between;
-  align-items: center;
-  padding: 1em;
+  padding: 1em 2em;
+  background-color: #000;
+  border-bottom: 1px solid #333;
 }
-.nav-left {
-  display: flex;
-  gap: 1em;
-  list-style: none;
+
+.nav-left a, .nav-right button {
+  color: #ccc;
+  text-decoration: none;
+  margin-right: 1.5em;
+  font-size: 1em;
 }
-.nav-right {
-  display: flex;
-  gap: 1em;
-  align-items: center;
+
+.nav-left a:hover, .nav-right button:hover {
+  color: #fff;
 }
+
 #login-btn {
-  background-color: #24292f;
-  color: white;
-  border: none;
-  padding: 0.5em 1em;
-  cursor: pointer;
+  background-color: transparent;
+  border: 1px solid #555;
+  padding: 0.4em 1em;
   border-radius: 4px;
+  cursor: pointer;
+  color: #ccc;
 }
-#login-btn:hover {
-  background-color: #0366d6;
+
+#avatar {
+  display: none;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+}
+main {
+  padding: 3em 2em;
+  text-align: center;
 }
