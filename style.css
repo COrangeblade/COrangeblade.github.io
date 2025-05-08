@@ -10,46 +10,44 @@ header {
   padding: 10px 20px;
   position: fixed;
   top: 0;
-  left: 0;
   width: 100%;
   z-index: 1000;
 }
 
 .navbar {
+  max-width: 1200px;
+  margin: 0 auto;
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
 
-/* 顶部左侧链接 */
-.nav-left .nav-link {
+.nav-left a {
   color: #ccc;
   text-decoration: none;
-  font-weight: bold;
+  margin-right: 20px;
 }
 
-.nav-left .nav-link:hover {
-  color: white;
+.nav-left a:hover {
   text-decoration: underline;
+  color: white;
 }
 
-/* 顶部右侧登录区 */
 .nav-right {
   display: flex;
   align-items: center;
-  gap: 10px;
 }
 
 #avatar {
   width: 30px;
   height: 30px;
   border-radius: 50%;
-  display: inline-block;
-  visibility: hidden; /* 占位但默认隐藏 */
+  margin-left: 10px;
+  display: none;
 }
 
 #login-btn {
-  padding: 6px 12px;
+  padding: 5px 10px;
   background-color: #444;
   color: white;
   border: none;
@@ -61,87 +59,9 @@ header {
   background-color: #666;
 }
 
-/* 主体内容区域 */
+/* --- Main content --- */
+
 main {
   display: flex;
   justify-content: center;
-  align-items: center;
-  height: 100vh;
-  padding-top: 60px;
-  text-align: center;
-}
-
-.center-content {
-  transform: translateY(-20%);
-}
-
-/* 欢迎语区域 */
-.intro-text h1 {
-  font-size: 2.5em;
-  margin-bottom: 10px;
-}
-
-.intro-text p {
-  font-size: 1.2em;
-  margin-bottom: 30px;
-  color: #bbb;
-}
-
-/* 主按钮区域 */
-.button-group {
-  display: flex;
-  flex-direction: column;
-  gap: 15px;
-  align-items: center;
-}
-
-.main-button {
-  background-color: #333;
-  color: white;
-  text-decoration: none;
-  padding: 12px 24px;
-  border-radius: 6px;
-  font-size: 1em;
-  transition: background-color 0.3s ease;
-  min-width: 200px;
-  text-align: center;
-}
-
-.main-button:hover {
-  background-color: #555;
-}
-
-/* ✅ 响应式优化 */
-@media screen and (max-width: 600px) {
-  .navbar {
-    flex-direction: column;
-    align-items: flex-start;
-  }
-
-  .nav-right {
-    width: 100%;
-    justify-content: flex-end;
-    margin-top: 10px;
-  }
-
-  main {
-    padding: 80px 20px 20px;
-  }
-
-  .center-content {
-    transform: translateY(-10%);
-  }
-
-  .main-button {
-    width: 100%;
-    max-width: 280px;
-  }
-
-  .intro-text h1 {
-    font-size: 1.8em;
-  }
-
-  .intro-text p {
-    font-size: 1em;
-  }
-}
+  align-items:
