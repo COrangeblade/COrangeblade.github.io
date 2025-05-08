@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>GitHub 登录回调</title>
+</head>
+<body>
+  <script>
+    const urlParams = new URLSearchParams(window.location.search);
+    const code = urlParams.get("code");
+
+    if (code) {
+      fetch(`/get-github-user?code=${code}`)
+        .then(response => response.json())
+        .then(data => {
+          if (data.avatar_url) {
+            localStorage.setItem("avatar_url", data.avatar_url);
+            window.location.href = "index.html";
+          } else {
+            alert("获取用户信息失败");
+          }
+        })
+        .catch(() => alert("请求失败"));
+    } else {
+      alert("授权失败");
+    }
+  </script>
+</body>
+</html>
