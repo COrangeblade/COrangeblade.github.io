@@ -8,17 +8,21 @@ body {
 header {
   background-color: #111; /* 深色背景 */
   padding: 10px 20px;
+  position: fixed; /* 确保导航栏固定在顶部 */
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000; /* 确保导航栏位于最上层 */
 }
 
 .navbar {
   display: flex;
-  justify-content: center; /* 确保导航条内容水平居中 */
+  justify-content: space-between; /* 左右两侧分开 */
   align-items: center;
 }
 
 .nav-left {
   display: flex;
-  justify-content: center; /* 使导航链接在导航栏中居中 */
   align-items: center;
 }
 
@@ -63,14 +67,17 @@ header {
 main {
   display: flex;
   justify-content: center;
-  align-items: center;
-  height: 80vh; /* 占据大部分页面高度 */
-  text-align: center;
+  align-items: flex-start; /* 让内容稍微偏上 */
+  height: 100vh; /* 占据整个屏幕高度 */
+  margin-top: 60px; /* 给导航栏留出空间 */
   background-color: #121212; /* 主内容区域背景色设置为更深的黑色 */
 }
 
 .content {
+  text-align: center;
   padding: 20px;
+  position: absolute;
+  top: 30%; /* 让内容区域稍微偏上 */
 }
 
 h1 {
