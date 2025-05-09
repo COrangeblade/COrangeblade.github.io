@@ -80,7 +80,7 @@ main {
   flex-direction: column;
   align-items: center;
   text-align: center;
-  margin-top: -70px; /* 向上调整位置 */
+  margin-top: -60px; /* 向上调整位置 */
 }
 
 /* 文字区域 */
